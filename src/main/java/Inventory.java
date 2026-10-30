@@ -40,7 +40,7 @@ public class Inventory {
     }
 
     private static void listAllProducts(List<Product> inventory) {
-        //Collections.sort()
+        inventory.sort(Comparator.comparing(Product::getName));
         for (Product p : inventory) {
             System.out.println(p.displayProductInfo());
         }
@@ -93,12 +93,13 @@ public class Inventory {
         List<Product> inventory = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/" + fileToRead));
+            String fileLine = reader.readLine();
             do {
-                String fileLine = reader.readLine();
                 String[] tokens = fileLine.split("\\|");
                 Product p = new Product(Integer.parseInt(tokens[0]), tokens[1], Double.parseDouble(tokens[2]));
                 inventory.add(p);
-            } while (reader.readLine() != null) ;
+            } while ((fileLine = reader.readLine()) != null);
+            reader.close();
         } catch (IOException e) {
             System.out.println("File not found!");
             e.printStackTrace();
