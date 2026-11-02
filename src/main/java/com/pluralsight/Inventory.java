@@ -1,5 +1,6 @@
+package com.pluralsight;
+
 import java.io.*;
-import java.sql.SQLOutput;
 import java.util.*;
 
 public class Inventory {
